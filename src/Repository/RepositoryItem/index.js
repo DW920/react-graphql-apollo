@@ -32,16 +32,21 @@ const RepositoryItem = ({
         <Link href={url}>{name}</Link>
       </h2>
       <div className="RepositoryItem-title-action">
-        <Mutation mutation={STAR_REPOSITORY} variables={{ id }}>
-          {(addStar) => (
-            <Button
-              className={'RepositoryItem-title-action'}
-              onClick={addStar}
-            >
-              {stargazers.totalCount} Star
-            </Button>
-          )}
-        </Mutation>
+      {!viewerHasStarred ? (
+          <Mutation mutation={STAR_REPOSITORY} variables={{ id }}>
+            {(addStar, { data, loading, error }) => (
+              <Button
+                className={'RepositoryItem-title-action'}
+                onClick={addStar}
+              >
+                {stargazers.totalCount} Star
+              </Button>
+            )}
+          </Mutation>
+        ) : (
+          <span>{/* Here comes your removeStar mutation */}</span>
+        )}
+      {/* Here comes your updateSubscription mutation */}
       </div>
     </div>
     <div className="RepositoryItem-description">

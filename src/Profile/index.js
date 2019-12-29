@@ -1,5 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 import { Query } from 'react-apollo';
 
 const GET_CURRENT_USER = gql`
@@ -46,18 +47,15 @@ const GET_REPOSITORIES_OF_CURRENT_USER = gql`
   }
 `;
 
-const Profile = () => (
-    <Query query={GET_REPOSITORIES_OF_CURRENT_USER}>
-        {({ data, loading, error }) => {
-            if (error) {
-                return <ErrorMessage error={error} />;
-            }
-            const { viewer } = data;
-            if (loading || !viewer) {
-                return <div>Loading ...</div>;
-            }
-            return <RepositoryList repositories={viewer.repositories} />;
-        }}
-    </Query>
-);
-export default Profile;
+const Profile = ({ data, loading, error }) => {
+    if (error) {
+      return <ErrorMessage error={error} />;
+    }
+    const { viewer } = data;
+    if (loading || !viewer) {
+      return <Loading />;
+    }
+    return <RepositoryList repositories={viewer.repositories} />;
+  };
+  
+export default graphql(GET_REPOSITORIES_OF_CURRENT_USER)(Profile);
