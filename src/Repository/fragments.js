@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+
 const REPOSITORY_FRAGMENT = gql`
   fragment repository on Repository {
     id
@@ -22,4 +23,5 @@ const REPOSITORY_FRAGMENT = gql`
     viewerSubscription
   }
 `;
+
 export default REPOSITORY_FRAGMENT;
