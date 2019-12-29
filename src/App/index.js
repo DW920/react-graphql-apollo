@@ -12,7 +12,7 @@ import './style.css';
 
 class App extends Component {
   state = {
-    organizationName: 'the-road-to-learn-react',
+    organizationName: 'DW-SOFT-GROUP',
   };
 
   onOrganizationSearch = value => {
@@ -51,7 +51,7 @@ class App extends Component {
             />
           </div>
 
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </Router>
     );
